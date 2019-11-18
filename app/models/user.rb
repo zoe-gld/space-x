@@ -6,4 +6,5 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :phone_number, presence: true
   mount_uploader :avatar, PhotoUploader
   has_many :spaces
+  has_many :bookings
 end

@@ -1,43 +1,7 @@
 // Specific CSS for your home-page
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-
 body {
-  background-color: blue;
+
   font-family: 'Roboto', sans-serif;
-}
-
-nav {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100vw;
-  height: 60px;
-  background-color: black;
-  color: white;
-  font-size:  24px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center
-
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  margin: 5px 20px;
-  font-size: .8em;
-  -webkit-font-smoothing: antialiased;
-}
-
-nav a:hover {
-  text-decoration: none;
-  color: #f02669
-}
-
-
-h1 {
-  font-family: Graphik;
-  color: red;
 }
 
 h3 {
@@ -93,3 +57,5 @@ form {
     background-color: #bd0d47;
   }
 }
+
+

@@ -3,7 +3,7 @@
   <%= f.input :address %>
   <%= f.input :description %>
   <%= f.input :address %>
-  <%= f.input :category %>
+  <%= f.input :category, collection: available_categories %>
   <%= f.input :price %>
   <%= f.input :cover_image %>
   <%= f.input :cover_image_cache, as: :hidden %>

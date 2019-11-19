@@ -3,6 +3,8 @@ class ReviewsController < ApplicationController
   before_action :set_space
 
   def create
+    @booking = Booking.new
+    @reviewed_booking = Booking.where(user: current_user).last
     @review = Review.new(review_params)
     @review.booking = Booking.where(user: current_user, space: @space).last
     if @review.save

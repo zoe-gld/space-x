@@ -1,0 +1,12 @@
+<%= simple_form_for @space do |f| %>
+  <%= f.input :name %>
+  <%= f.input :address %>
+  <%= f.input :description %>
+  <%= f.input :address %>
+  <%= f.input :category %>
+  <%= f.input :price %>
+  <%= f.input :cover_image %>
+  <%= f.input :cover_image_cache, as: :hidden %>
+  <%= f.input :published %>
+  <%= f.submit class: 'btn btn-primary mb-2' %>
+<% end %>

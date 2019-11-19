@@ -5,7 +5,7 @@
 
 <%= render 'spaces/booking-form' %>
 
-<% @bookings.each do |booking| %>
+<% @space.bookings.where(user: current_user).each do |booking| %>
   <p>
     You have booked <%= booking.space.name %> on <%= booking.date %>
     <%= link_to("Edit", edit_space_booking_path(@space, booking)) %>

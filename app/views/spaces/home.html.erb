@@ -1,5 +1,5 @@
 <div class="container">
-  
+
   <div class="hero">
     <div class="hero-text">
       <h1>Find the best party venues in your area.</h1>
@@ -17,7 +17,9 @@
               <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Anytime">
             </div>
 
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="submit" class="btn btn-primary">
+              <%= link_to("Search", spaces_path) %>
+            </button>
         </form>
     </div>
 

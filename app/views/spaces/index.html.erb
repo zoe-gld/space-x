@@ -1,0 +1,7 @@
+<% @spaces.each do |space| %>
+  <p>
+    <%= link_to(space.name, space_path(space)) %>
+    <%= space.address %>
+    <%= space.user.first_name %> <%= space.user.last_name %>
+  </p>
+<% end %>

@@ -1,0 +1,6 @@
+<h1> <%= @space.name %> </h1>
+<h1> <%= @space.address %> </h1>
+
+<%= image_tag @space.cover_image.url unless @space.cover_image.file.nil? %>
+
+<%= link_to("Go back", spaces_path)  %>

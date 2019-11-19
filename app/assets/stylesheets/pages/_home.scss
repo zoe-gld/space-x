@@ -13,7 +13,7 @@ h3 {
 }
 
 .hero {
-  background-image:  linear-gradient(to bottom, rgba(0,0,0,.5)), url("party.jpg");
+  background-image:  linear-gradient(to bottom, rgba(0,0,0,.5)), url(asset_path("party.jpg"));
   height: 100vh;
   width: 100vw;
   background-size: cover;

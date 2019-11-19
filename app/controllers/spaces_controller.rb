@@ -12,6 +12,8 @@ class SpacesController < ApplicationController
   def show
     @space = Space.find(params[:id])
     @booking = Booking.new
+    @reviewed_booking = Booking.where(user: current_user).last
+    @review = Review.new
   end
 
   def new

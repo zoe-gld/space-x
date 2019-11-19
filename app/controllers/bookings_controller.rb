@@ -1,10 +1,11 @@
 class BookingsController < ApplicationController
-  before_action :set_space, :set_user
+  before_action :set_booking, only: [:edit, :update, :destroy]
+  before_action :set_space
 
   def create
     @booking = Booking.new(booking_params)
     @booking.space = @space
-    @booking.user = @user
+    @booking.user = current_user
     if @booking.save
       redirect_to space_path(@space)
     else
@@ -13,17 +14,18 @@ class BookingsController < ApplicationController
   end
 
   def edit
-    @booking = Booking.find(params[:id])
   end
 
   def update
-    @booking = Booking.find(params[:id])
     @booking.update(booking_params)
-    redirect_to space_path(@space)
+    if @booking.update(booking_params)
+      redirect_to space_path(@space)
+    else
+      render 'edit'
+    end
   end
 
   def destroy
-    @booking = Booking.find(params[:id])
     @booking.destroy
     redirect_to space_path(@space)
   end
@@ -38,8 +40,7 @@ class BookingsController < ApplicationController
     @space = Space.find(params[:space_id])
   end
 
-  def set_user
-    @user = current_user
+  def set_booking
+    @booking = Booking.find(params[:id])
   end
-
 end

@@ -1,0 +1,23 @@
+.header-banner {
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.show-header {
+  margin: -100px 100px 0 100px;
+  color: white;
+  p {
+    color: white;
+  }
+}
+
+.show-box-left {
+  background-color: white;
+  padding: 20px;
+  font-size: 18px;
+  color: black;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}

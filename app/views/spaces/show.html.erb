@@ -3,4 +3,16 @@
 
 <%= image_tag @space.cover_image.url unless @space.cover_image.file.nil? %>
 
+<%= render 'spaces/booking-form' %>
+
+<% @bookings.each do |booking| %>
+  <p>
+    You have booked <%= booking.space.name %> on <%= booking.date %>
+    <%= link_to("Edit", edit_space_booking_path(@space, booking)) %>
+    <%= link_to space_booking_path(@space, booking), method: :delete, data: {confirm: "Are you sure?"} do %>
+      <i class="far fa-trash-alt"></i>
+    <% end %>
+  </p>
+<% end %>
+
 <%= link_to("Go back", spaces_path)  %>

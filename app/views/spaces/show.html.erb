@@ -1,4 +1,37 @@
-<h1> <%= @space.name %> </h1>
+<div class="header-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path @space.cover_image%>')">
+</div>
+
+<div class="show-header">
+  <h1><%= @space.name %></h1>
+  <p><%= @space.address %></p>
+</div>
+
+
+
+<div class="pages-container">
+  <div class="row">
+      <div class="col-6">
+        <div class="show-box-left">
+          <h2>About this venue</h2>
+          <p class="description"> <%= @space.description %> </p>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="show-box-left">
+          <h2>Book now</h2>
+          <%= render 'spaces/booking-form' %>
+        </div>
+      </div>
+  </div>
+
+</div>
+
+
+
+
+
+</div>
 <h1> <%= @space.address %> </h1>
 
 <%= image_tag @space.cover_image.url unless @space.cover_image.file.nil? %>

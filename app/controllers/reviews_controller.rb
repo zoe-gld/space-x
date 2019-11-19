@@ -1,12 +1,11 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:edit, :update, :destroy]
-  before_action :set_space
+  before_action :set_space, :set_reviewed_booking
 
   def create
     @booking = Booking.new
-    @reviewed_booking = Booking.where(user: current_user).last
     @review = Review.new(review_params)
-    @review.booking = Booking.where(user: current_user, space: @space).last
+    @review.booking = @reviewed_booking
     if @review.save
       redirect_to space_path(@space)
     else
@@ -41,9 +40,11 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
   end
 
+  def set_reviewed_booking
+    @reviewed_booking = Booking.where(user: current_user, space: @space).last
+  end
+
   def set_space
     @space = Space.find(params[:space_id])
   end
 end
-
-

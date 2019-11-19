@@ -1,2 +1,23 @@
-<h1>Reviews#edit</h1>
-<p>Find me in app/views/reviews/edit.html.erb</p>
+<%= simple_form_for [@space, @reviewed_booking, @review] do |f| %>
+  <% if @review.errors.any? %>
+    <div class="alert alert-danger">
+      <h4>Warning! You have some errors:</h4>
+        <ul>
+          <% @review.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+    </div>
+  <% end %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :content %>
+    <%= f.input :rating, collection: (0..5).to_a %>
+  </div>
+
+  <div class="form-actions btn-primary btn">
+    <%= f.button :submit %>
+  </div>
+
+<% end %>

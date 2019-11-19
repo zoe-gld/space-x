@@ -3,7 +3,7 @@
 
 <%= image_tag @space.cover_image.url unless @space.cover_image.file.nil? %>
 
-<%= render 'spaces/booking-form' %>
+<%= render 'bookings/booking-form' %>
 
 <% @bookings.each do |booking| %>
   <p>

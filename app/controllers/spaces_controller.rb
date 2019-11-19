@@ -10,9 +10,9 @@ class SpacesController < ApplicationController
   end
 
   def show
+    @bookings = Booking.where(space: @space).where(user: current_user)
     @space = Space.find(params[:id])
     @booking = Booking.new
-    @bookings = Booking.where(space: @space).where(user: current_user)
   end
 
   def new

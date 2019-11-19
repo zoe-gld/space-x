@@ -30,7 +30,8 @@ h3 {
 
 .hero-text h1 {
   font-size: 3em;
-  color: white
+  color: white;
+  font-weight: bold;
 }
 
 
@@ -44,7 +45,6 @@ form {
   background-color: white;
   width: 30vw;
   border-radius: 3px;
-  box-shadow: 10px 10px 10px -1px rgba(235, 52, 155,0.6);
 }
 
 .btn-primary {

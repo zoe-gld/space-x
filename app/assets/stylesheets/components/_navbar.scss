@@ -6,6 +6,7 @@
   top: 0;
   width: 100vw;
   z-index: 100000000000000;
+  padding: .75em 1.5em;
 }
 
 
@@ -22,4 +23,30 @@
 .navbar-light .navbar-nav .nav-link {
     color: white;
     -webkit-font-smoothing: antialiased;
+    margin-right: 2.5em;
+    letter-spacing: .1em;
+
+    &:hover {
+      color: #f02669
+    }
+    &:active {
+      color: white;
+    }
 }
+
+
+
+.navbar-light .navbar-toggler-icon {
+    background-image: url("menu-burger.png");
+    width: 40px;
+
+    &:active {
+      border: none;
+      outline: none;
+    }
+}
+
+button:focus {
+    outline: none
+   }
+

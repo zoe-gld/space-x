@@ -5,6 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :first_name, :last_name, :phone_number, presence: true
   mount_uploader :avatar, PhotoUploader
-  has_many :spaces
+  has_many :spaces, foreign_key: 'owner_id'
   has_many :bookings
 end

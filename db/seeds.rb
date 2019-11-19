@@ -1,24 +1,36 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+puts 'Cleaning database'
+User.destroy_all
 
-# puts 'Cleaning database'
-# User.destroy_all
+puts 'Creating users...'
 
-# puts 'Creating users...'
+50.times do
+  user = User.new(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name)
+  User.create(
+    first_name: user.first_name,
+    last_name: user.last_name,
+    email: "#{user.first_name}.#{user.last_name}@#{Faker::Internet.domain_name}",
+    phone_number: Faker::PhoneNumber.cell_phone,
+    password: Faker::Internet.password(min_length: 6)
+  )
+end
+puts 'Users created'
 
-# 50.times do
-#   User.create(
-#     first_name:
-#     last_name:
+puts 'Creating spaces...'
+Space.destroy_all
 
-#   )
-# end
+SAMPLE = ['concert hall','movie theater', 'house', 'cave', 'museum', 'art gallery', 'aquarium']
 
-# puts 'Creating spaces...'
+100.times do
+  space = Space.create(
+    name: Faker::Address.unique.community,
+    address: Faker::Address.full_address,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum ex aliquam earum, obcaecati quos hic modi dignissimos, veniam sunt in pariatur natus expedita excepturi perferendis animi voluptatem velit neque dolore.',
+    category: SAMPLE.sample,
+    price: 1000,
+    owner_id: User.find(User.first.id + rand(50)).id
+    )
+end
 
-# puts 'Done!'
+puts 'Done!'

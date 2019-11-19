@@ -3,7 +3,7 @@
 
 <%= image_tag @space.cover_image.url unless @space.cover_image.file.nil? %>
 
-<%= render 'spaces/booking-form' %>
+<%= render 'bookings/booking-form' %>
 
 <% @space.bookings.where(user: current_user).each do |booking| %>
   <p>
@@ -19,7 +19,13 @@
 
 <% @space.bookings.where(user: current_user).each do |booking| %>
   <% booking.reviews.each do |review| %>
-    <p> <%='⭐️' *review.rating %> - <%= review.title %> - <%= review.content %> Edit Delete</p>
+    <p>
+      <%='⭐️' *review.rating %> - <%= review.title %> - <%= review.content %>
+      <%= link_to("Edit", edit_space_booking_review_path(@space, booking, review)) %>
+      <%= link_to space_booking_review_path(@space, booking, review), method: :delete, data: {confirm: "Are you sure?"} do %>
+        <i class="far fa-trash-alt"></i>
+      <% end %>
+    </p>
   <% end %>
 <% end %>
 

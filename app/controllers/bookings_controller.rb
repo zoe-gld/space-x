@@ -36,11 +36,11 @@ class BookingsController < ApplicationController
     params.require(:booking).permit(:date)
   end
 
-  def set_space
-    @space = Space.find(params[:space_id])
-  end
-
   def set_booking
     @booking = Booking.find(params[:id])
+  end
+
+  def set_space
+    @space = Space.find(params[:space_id])
   end
 end

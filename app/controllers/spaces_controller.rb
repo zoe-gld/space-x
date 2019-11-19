@@ -1,5 +1,6 @@
 class SpacesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:home, :index, :show]
+  before_action :set_space, only: [:show, :edit, :update]
 
   def home
     @spaces = Space.all.order(created_at: :desc).limit(5)
@@ -10,7 +11,6 @@ class SpacesController < ApplicationController
   end
 
   def show
-    @space = Space.find(params[:id])
     @booking = Booking.new
     @reviewed_booking = Booking.where(user: current_user, space: @space).last
     @review = Review.new
@@ -31,11 +31,9 @@ class SpacesController < ApplicationController
   end
 
   def edit
-    @space = Space.find(params[:id])
   end
 
   def update
-    @space = Space.find(params[:id])
     if @space.update(space_params)
       redirect_to space_path(@space)
     else
@@ -49,4 +47,7 @@ class SpacesController < ApplicationController
     params.require(:space).permit(:name, :address, :description, :category, :price, :cover_image, :published)
   end
 
+  def set_space
+    @space = Space.find(params[:id])
+  end
 end

@@ -1,27 +1,65 @@
-<h1> Welcome <%= @user.first_name %></h1>
 
-<p>First name: <%= @user.first_name %></p>
-<p>Last name: <%= @user.last_name %></p>
-<p>Phone number: <%= @user.phone_number %></p>
-<p>Email: <%= @user.email %></p>
 
-<%= link_to edit_user_path(@user) do  %>
-  <div class="btn btn-primary">Edit profile info</div>
-<% end %>
+<div class="account-container">
 
-<h2>My spaces</h2>
-<% @spaces.each do |space| %>
-  <p>
-    <%= space.name %>
-    <%= space.address %>
-    <%= link_to('Edit space', edit_space_path(space)) %>
-  </p>
-<% end %>
+  <div class="account-aside">
 
-<h2>My bookings</h2>
-<% @bookings.each do |booking| %>
-  <p>
-    <%= booking.space.name %> on <%= booking.date %>
-    <%= link_to('Edit booking', edit_space_booking_path(booking.space, booking)) %>
-  </p>
-<% end %>
+     <% if @user.avatar.file.nil? %>
+      <img src=<%= asset_path("user.png")%>>
+    <% else %>
+      <%= @user.avatar %>
+     <% end %>
+
+
+
+    <h1> Welcome, <%= @user.first_name %>!</h1>
+
+    <p><strong>First name:</strong>  <i><%= @user.first_name %></i><br>
+    <strong>Last name:</strong> <i><%= @user.last_name %></i><br>
+    <strong>Phone number:</strong>  <i><%= @user.phone_number %></i><br>
+    <strong>Email:</strong>  <i><%= @user.email %></i></p>
+
+    <%= link_to edit_user_path(@user) do  %>
+      <div class="btn btn-primary">Edit profile info</div>
+    <% end %>
+  </div>
+
+  <div class="account-main">
+    <h1>My spaces</h1>
+    <div class="row">
+      <% @spaces.each do |space| %>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card-user">
+            <img src=<%=cl_image_path space.cover_image%> >
+              <div class="card-user-text">
+                <div class="card-user-info">
+                  <h2><%= space.name %></h2>
+                   <h3><%= link_to('Edit space', edit_space_path(space)) %></h3>
+                </div>
+                <h2>📍<%= space.address %></h2>
+              </div>
+          </div>
+        </div>
+
+      <% end %>
+    </div>
+
+
+    <h1>My bookings</h1>
+    <div class="row">
+      <% @bookings.each do |booking| %>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="card-user booking">
+               <img src=<%=cl_image_path booking.space.cover_image%> >
+            <div class="card-user-info booking">
+              <h2><strong><%= booking.space.name %></strong>, <i>on <%= booking.date %></i></h2>
+              <h3><%= link_to('Edit booking', edit_space_booking_path(booking.space, booking)) %></h3>
+              </div>
+            </div>
+        </div>
+      <% end %>
+    </div>
+
+</div>
+
+  </div>

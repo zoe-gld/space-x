@@ -8,9 +8,20 @@ class SpacesController < ApplicationController
 
   def index
     @spaces = Space.all.order(created_at: :desc)
+    @geospaces = Space.geocoded
+    @markers = @geospaces.map do |space|
+      {
+        lat: space.latitude,
+        lng: space.longitude
+      }
+    end
   end
 
   def show
+    @markers = [{
+        lat: @space.latitude,
+        lng: @space.longitude
+      }]
     @booking = Booking.new
     @reviewed_booking = Booking.where(user: current_user, space: @space).last
     @review = Review.new

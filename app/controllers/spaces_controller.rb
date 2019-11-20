@@ -7,7 +7,7 @@ class SpacesController < ApplicationController
   end
 
   def index
-    @spaces = Space.all
+    @spaces = Space.all.order(created_at: :desc)
     @geospaces = Space.geocoded
     @markers = @geospaces.map do |space|
       {

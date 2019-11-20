@@ -7,7 +7,7 @@ class SpacesController < ApplicationController
   end
 
   def index
-    @spaces = Space.all
+    @spaces = Space.all.order(created_at: :desc)
   end
 
   def show

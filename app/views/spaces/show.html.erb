@@ -48,6 +48,15 @@
   </p>
 <% end %>
 
+<%= render 'map' %>
+<div
+  id="map"
+  style="width: 100%;
+  height: 600px; border:1px solid;"
+  data-markers="<%= @markers.to_json %>"
+  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+></div>
+
 <%= render 'reviews/review-form' unless @reviewed_booking.nil? %>
 
 <% @space.bookings.where(user: current_user).each do |booking| %>

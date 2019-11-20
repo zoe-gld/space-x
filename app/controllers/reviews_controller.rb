@@ -3,12 +3,16 @@ class ReviewsController < ApplicationController
   before_action :set_space, :set_reviewed_booking
 
   def create
-    @booking = Booking.new
     @review = Review.new(review_params)
     @review.booking = @reviewed_booking
     if @review.save
       redirect_to space_path(@space)
     else
+      @booking = Booking.new
+      @markers = [{
+          lat: @space.latitude,
+          lng: @space.longitude
+        }]
       render 'spaces/show'
     end
   end

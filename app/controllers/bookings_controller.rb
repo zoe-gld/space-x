@@ -9,6 +9,12 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to space_path(@space)
     else
+      @review = Review.new
+      @reviewed_booking = Booking.where(user: current_user, space: @space).last
+      @markers = [{
+          lat: @space.latitude,
+          lng: @space.longitude
+        }]
       render 'spaces/show'
     end
   end

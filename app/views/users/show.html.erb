@@ -1,0 +1,10 @@
+<h1> Welcome <%= @user.first_name %></h1>
+
+<p>Phone number: <%= @user.phone_number %></p>
+
+<% @spaces.each do |space| %>
+  <p>
+    <%= space.name %>
+    <%= space.address %>
+  </p>
+<% end %>

@@ -61,8 +61,11 @@
               <% end %>
             <div class="card-user-info booking">
               <h2><strong><%= booking.space.name %></strong>, <i>on <%= booking.date %></i></h2>
-              <h3><%= link_to('Edit booking', edit_space_booking_path(booking.space, booking)) %></h3>
-              </div>
+                <h3>
+                  <%= link_to('Edit booking date', edit_space_booking_path(booking.space, booking)) %>
+                  <%= link_to('Delete booking', space_booking_path(booking.space, booking), method: :delete, data: {confirm: "Are you sure?"}) %></h3>
+                </h3>
+            </div>
             </div>
         </div>
       <% end %>

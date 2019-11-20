@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-
-  devise_for :users
   root to: 'spaces#home'
 
+  devise_for :users
+  resources :users, only: [:edit, :update]
   get 'my_account', to: 'users#show'
 
   resources :spaces, except: [:delete] do

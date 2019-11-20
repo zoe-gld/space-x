@@ -1,7 +1,9 @@
-puts 'Cleaning database'
+puts 'Cleaning users'
 User.destroy_all
 
 puts 'Creating users...'
+
+Faker::Config.locale = 'pt'
 
 50.times do
   user = User.new(
@@ -17,8 +19,10 @@ puts 'Creating users...'
 end
 puts 'Users created'
 
-puts 'Creating spaces...'
+puts 'Cleaning spaces...'
 Space.destroy_all
+
+puts 'Creating users...'
 
 SAMPLE = ['concert hall','movie theater', 'house', 'cave', 'museum', 'art gallery', 'aquarium']
 

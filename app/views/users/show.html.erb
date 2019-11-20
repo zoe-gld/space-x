@@ -1,10 +1,27 @@
 <h1> Welcome <%= @user.first_name %></h1>
 
+<p>First name: <%= @user.first_name %></p>
+<p>Last name: <%= @user.last_name %></p>
 <p>Phone number: <%= @user.phone_number %></p>
+<p>Email: <%= @user.email %></p>
 
+<%= link_to edit_user_path(@user) do  %>
+  <div class="btn btn-primary">Edit profile info</div>
+<% end %>
+
+<h2>My spaces</h2>
 <% @spaces.each do |space| %>
   <p>
     <%= space.name %>
     <%= space.address %>
+    <%= link_to('Edit space', edit_space_path(space)) %>
+  </p>
+<% end %>
+
+<h2>My bookings</h2>
+<% @bookings.each do |booking| %>
+  <p>
+    <%= booking.space.name %> on <%= booking.date %>
+    <%= link_to('Edit booking', edit_space_booking_path(booking.space, booking)) %>
   </p>
 <% end %>

@@ -1,66 +1,82 @@
-<div class="header-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path @space.cover_image%>')">
-</div>
+<% if @space.cover_image.file.nil? %>
+  <div class="header-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path("placeholder.jpg") %>)">
+  </div>
+<% else %>
+  <div class="header-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path @space.cover_image%>')">
+  </div>
+<% end %>
 
 <div class="show-header">
   <h1><%= @space.name %></h1>
-  <p><%= @space.address %></p>
+  <p>📌<%= @space.address %></p>
 </div>
-
-
 
 <div class="pages-container">
-  <div class="row">
-      <div class="col-6">
-        <div class="show-box-left">
-          <h2>About this venue</h2>
-          <p class="description"> <%= @space.description %> </p>
-        </div>
-      </div>
 
-      <div class="col-6">
-        <div class="show-box-left">
-          <h2>Book now</h2>
-          <%= render 'bookings/booking-form' %>
-        </div>
-      </div>
+  <div class="action-bar">
+  <%= link_to("Go back", spaces_path, class: 'btn btn-outline-secondary')  %>
   </div>
 
-</div>
+  <div class="show-details">
 
+  <div class="column-left">
 
+      <div class="show-box">
+        <h2>About this venue</h2>
+        <p class="description"> <%= @space.description %> </p>
+      </div>
 
-
-
-</div>
-<h1> <%= @space.address %> </h1>
-
-<%= image_tag @space.cover_image.url unless @space.cover_image.file.nil? %>
-
-<%= render 'bookings/booking-form' %>
-
-<% @space.bookings.where(user: current_user).each do |booking| %>
-  <p>
-    You have booked <%= booking.space.name %> on <%= booking.date %>
-    <%= link_to("Edit", edit_space_booking_path(@space, booking)) %>
-    <%= link_to space_booking_path(@space, booking), method: :delete, data: {confirm: "Are you sure?"} do %>
-      <i class="far fa-trash-alt"></i>
-    <% end %>
-  </p>
-<% end %>
-
-<%= render 'reviews/review-form' unless @reviewed_booking.nil? %>
-
-<% @space.bookings.where(user: current_user).each do |booking| %>
-  <% booking.reviews.each do |review| %>
-    <p>
-      <%='⭐️' *review.rating %> - <%= review.title %> - <%= review.content %>
-      <%= link_to("Edit", edit_space_booking_review_path(@space, booking, review)) %>
-      <%= link_to space_booking_review_path(@space, booking, review), method: :delete, data: {confirm: "Are you sure?"} do %>
-        <i class="far fa-trash-alt"></i>
+      <% unless @reviewed_booking.nil? %>
+        <div class="show-box">
+          <h2>Reviews</h2>
+          <% @space.bookings.each do |space| %>
+            <% space.reviews.each do |review| %>
+              <p><%='⭐️' *review.rating %> - <%= review.title %> - <%= review.content %></p>
+            <% end %>
+          <% end %>
+        </div>
       <% end %>
-    </p>
-  <% end %>
-<% end %>
 
+      <div class="show-box">
+        <h2>Location</h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3112.6394333559815!2d-9.147675684885057!3d38.7260864795974!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd19351a74f8e2a3%3A0x779f5b9fe8faf6a7!2sLe%20Wagon%20Lisbon%20Coding%20Bootcamp!5e0!3m2!1sde!2spt!4v1574248566801!5m2!1sde!2spt" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+      </div>
 
-<%= link_to("Go back", spaces_path)  %>
+      <% unless @reviewed_booking.nil? %>
+        <div class="show-box">
+          <h2>Review your experience</h2>
+          <%= render 'reviews/review-form' %>
+          <% @space.bookings.where(user: current_user).each do |booking| %>
+            <% booking.reviews.each do |review| %>
+              <p>
+                <%='⭐️' *review.rating %> - <%= review.title %> - <%= review.content %>
+                <%= link_to("Edit", edit_space_booking_review_path(@space, booking, review)) %>
+                <%= link_to space_booking_review_path(@space, booking, review), method: :delete, data: {confirm: "Are you sure?"} do %>
+                  <i class="far fa-trash-alt"></i>
+                <% end %>
+              </p>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+  </div>
+
+  <div class="column-right">
+
+      <div class="show-box">
+        <h2>Book now</h2>
+        <%= render 'bookings/booking-form' %>
+        <% @space.bookings.where(user: current_user).each do |booking| %>
+          <p>
+            You have booked <%= booking.space.name %> on <%= booking.date %></br>
+            <%= link_to("Edit", edit_space_booking_path(@space, booking)) %>
+            <%= link_to space_booking_path(@space, booking), method: :delete, data: {confirm: "Are you sure?"} do %>
+              <i class="far fa-trash-alt"></i>
+            <% end %>
+          </p>
+        <% end %>
+      </div>
+  </div>
+</div>
+
+</div>

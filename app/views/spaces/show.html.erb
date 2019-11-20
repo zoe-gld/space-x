@@ -62,9 +62,9 @@
   </div>
 
   <div class="column-right">
-
+    <div class="sticky-booking">
       <div class="show-box">
-        <h2>Book now</h2>
+        <h2>Book now for <%= @space.price %>,00 €</h2>
         <%= render 'bookings/booking-form' %>
         <% @space.bookings.where(user: current_user).each do |booking| %>
           <p>
@@ -75,6 +75,7 @@
             <% end %>
           </p>
         <% end %>
+      </div>
       </div>
   </div>
 </div>

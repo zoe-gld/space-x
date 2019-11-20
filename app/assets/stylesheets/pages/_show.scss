@@ -30,13 +30,16 @@ a {
 }
 
 .column-left {
-  display: flex;
+  flex: 50%;
   flex-direction: column;
+  margin-right: 50px;
 }
 
 .column-right {
-  display: flex;
+  flex: 30%;
   flex-direction: column;
+  position: sticky;
+  top: 0;
 }
 
 .action-bar {
@@ -49,6 +52,15 @@ a {
 
 .mapboxgl-map{
   border: 0;
+}
+
+.show-details {
+  display: flex;
+}
+
+.sticky-booking {
+  position: sticky;
+  top: 100px;
 }
 
 

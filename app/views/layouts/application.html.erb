@@ -47,7 +47,16 @@
 
     <!-- Fix navbar overlap -->
 
+    <% unless params[:controller] == "spaces" %>
+      <div  class="pages-container">
+    <% else %>
+      <div>
+    <% end %>
+
     <%= yield %>
+
+    </div>
+
     <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
   </body>

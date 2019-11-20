@@ -30,7 +30,11 @@
       <% @spaces.each do |space| %>
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="card-user">
+            <% if space.cover_image.file.nil? %>
+              <img src=<%= asset_path("placeholder.jpg")%>>
+            <% else %>
             <img src=<%=cl_image_path space.cover_image%> >
+            <% end %>
               <div class="card-user-text">
                 <div class="card-user-info">
                   <h2><%= space.name %></h2>
@@ -50,7 +54,11 @@
       <% @bookings.each do |booking| %>
         <div class="col-lg-12 col-md-12 col-sm-12">
           <div class="card-user booking">
+              <% if booking.space.cover_image.file.nil? %>
+                <img src=<%= asset_path("party.jpg")%>>
+              <% else %>
                <img src=<%=cl_image_path booking.space.cover_image%> >
+              <% end %>
             <div class="card-user-info booking">
               <h2><strong><%= booking.space.name %></strong>, <i>on <%= booking.date %></i></h2>
               <h3><%= link_to('Edit booking', edit_space_booking_path(booking.space, booking)) %></h3>

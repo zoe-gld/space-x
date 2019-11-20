@@ -14,10 +14,35 @@
   }
 }
 
-.show-box-left {
+.show-box {
   background-color: white;
   padding: 20px;
   font-size: 18px;
   color: black;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+a {
+    color: #f02669;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.column-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.column-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.action-bar {
+  margin-bottom: 30px;
+}
+
+.btn-outline-secondary {
+  color: black;
 }

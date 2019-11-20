@@ -1,0 +1,31 @@
+form {
+  padding: 30px;
+  background-color: white;
+  width: 30vw;
+  border-radius: 3px;
+}
+
+.btn-primary, .btn-secondary {
+  background-color: #f02669;
+  border: none;
+  margin-top: 40px;
+  min-width: 200px;
+  color: white;
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
+  &:hover {
+    background-color: #bd0d47;
+  }
+}
+
+.btn {
+  color: white;
+  &:hover{
+    color: white;
+  }
+}
+

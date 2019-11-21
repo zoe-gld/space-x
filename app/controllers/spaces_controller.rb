@@ -11,7 +11,7 @@ class SpacesController < ApplicationController
     if params[:place].nil?
       @spaces = Space.all.order(created_at: :desc)
     else
-      search_results = Space.search("#{params[:cat]}") + Space.near("#{params[:place]}", 50)
+      search_results = Space.search("#{params[:cat]}") && Space.near("#{params[:place]}", 50)
       (params[:cat] == "" && params[:place] == "") ? @spaces = Space.all.order(created_at: :desc) : @spaces = search_results
     end
     @markers = @spaces.map do |space|

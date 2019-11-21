@@ -43,4 +43,3 @@ yarn-debug.log*
 .env*
 .env*
 
-config/initializers/algoliasearch.rb

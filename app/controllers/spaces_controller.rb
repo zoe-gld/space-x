@@ -4,6 +4,8 @@ class SpacesController < ApplicationController
 
   def home
     @spaces = Space.all.order(created_at: :desc).limit(5)
+    Space.clear_index!
+    Space.reindex!
   end
 
   def index

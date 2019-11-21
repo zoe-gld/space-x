@@ -26,11 +26,11 @@
         <p class="description"> <%= @space.description %> </p>
       </div>
 
-      <% unless @reviewed_booking.nil? %>
+      <% unless empty_reviews(@space) %>
         <div class="show-box">
           <h2>Reviews</h2>
-          <% @space.bookings.each do |space| %>
-            <% space.reviews.each do |review| %>
+          <% @space.bookings.each do |booking| %>
+            <% booking.reviews.each do |review| %>
               <p><%='⭐️' *review.rating %> - <%= review.title %> - <%= review.content %></p>
             <% end %>
           <% end %>

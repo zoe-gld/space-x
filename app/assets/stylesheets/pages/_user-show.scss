@@ -85,12 +85,9 @@
 
   }
 
-
-
-
-
 .card-user {
-
+  width: 340px;
+  height: 400px;
   overflow: hidden;
   background: white;
 
@@ -98,8 +95,15 @@
   margin-bottom: 30px;
 }
 
+.card-user .image {
+  height: 55%;
+  width: 100%;
+}
+
 .card-user img {
-  width: 100%
+  width: 100%;
+  height: 100%;
+  background-size: cover;
 }
 
 .card-user-text {
@@ -135,6 +139,7 @@
     color: gray
   }
 }
+
 
 
 .card-user.booking {

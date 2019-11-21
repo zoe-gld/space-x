@@ -1,6 +1,23 @@
 .index-container {
-  margin: 100px 50px 0 50px;
+  display: flex;
+}
 
+.card-grid-index {
+  padding: 100px 30px;
+  width: 50%;
+}
+
+.map-index {
+  height: 100vh;
+  width: 50%;
+  position: sticky;
+  top: 0;
+  bottom: 0;
+  align-items: stretch;
+}
+
+#map {
+  height: 100%;
 }
 
 .card-trip {

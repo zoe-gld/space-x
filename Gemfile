@@ -35,5 +35,4 @@ gem 'carrierwave', '~> 1.2'
 
 gem 'faker'
 gem 'geocoder'
-
-
+gem 'algoliasearch-rails'

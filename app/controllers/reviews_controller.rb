@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.booking = @reviewed_booking
     if @review.save
-      redirect_to space_path(@space)
+      redirect_to space_path(@space, anchor: 'reviews')
     else
       @booking = Booking.new
       @markers = [{

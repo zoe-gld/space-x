@@ -34,11 +34,16 @@
       </div>
 
       <% unless empty_reviews(@space) %>
-        <div class="show-box">
+        <div class="show-box" id="reviews">
           <h2>Reviews</h2>
           <% @space.bookings.each do |booking| %>
             <% booking.reviews.each do |review| %>
-              <p><%='⭐️' *review.rating %> - <%= review.title %> - <%= review.content %></p>
+              <p>
+                <%='⭐️' *review.rating %> - <%= review.title %> - <%= review.content %>
+                <%= link_to("Edit", edit_space_booking_review_path(@space, booking, review)) %>
+                <%= link_to space_booking_review_path(@space, booking, review), method: :delete, data: {confirm: "Are you sure?"} do %>
+                  <i class="far fa-trash-alt"></i>
+              </p>
             <% end %>
           <% end %>
         </div>
@@ -53,19 +58,8 @@
         <div class="show-box">
           <h2>Review your experience</h2>
           <%= render 'reviews/review-form' %>
-          <% @space.bookings.where(user: current_user).each do |booking| %>
-            <% booking.reviews.each do |review| %>
-              <p>
-                <%='⭐️' *review.rating %> - <%= review.title %> - <%= review.content %>
-                <%= link_to("Edit", edit_space_booking_review_path(@space, booking, review)) %>
-                <%= link_to space_booking_review_path(@space, booking, review), method: :delete, data: {confirm: "Are you sure?"} do %>
-                  <i class="far fa-trash-alt"></i>
-                <% end %>
-              </p>
-              <% end %>
-            <% end %>
-          </div>
-        <% end %>
+        </div>
+      <% end %>
   </div>
 
 

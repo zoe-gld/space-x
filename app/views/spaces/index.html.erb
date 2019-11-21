@@ -1,26 +1,6 @@
-<div class="index-container">
-  <div class="row">
-    <% @spaces.each do |space| %>
-        <div class="col-lg-4 col-md-6 col-sm-12">
-          <div class="card-trip">
-            <% if space.cover_image.file.nil? %>
-              <img src=<%= asset_path("placeholder.jpg") %>>
-            <% else %>
-              <%= cl_image_tag space.cover_image %>
-            <% end %>
-            <div class="card-text">
-              <div class="card-info">
-                <h2><%= link_to(space.name, space_path(space)) %></h2>
-                 <p><%= space.user.first_name %> <%= space.user.last_name %></p>
-              </div>
-              <h3>📍<%= space.address %></h3>
-            </div>
-          </div>
-        </div>
-    <% end %>
-  </div>
-</div>
-
-
-<div id="searchbox"></div>
-<div id="hits"></div>
+<% if @spaces.empty? %>
+  <h1 style="padding-top: 100px;">Sorry, there is no space matching your criteria.</h1>
+<% else %>
+  <%= render 'spaces/space-list' %>
+  <%= render 'spaces/map' %>
+<% end %>

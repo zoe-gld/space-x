@@ -1,5 +1,4 @@
 class Space < ApplicationRecord
-  include AlgoliaSearch
   validates :name, :address, :category, :price, presence: true
   mount_uploader :cover_image, PhotoUploader
   belongs_to :user, foreign_key: 'owner_id'
@@ -9,8 +8,8 @@ class Space < ApplicationRecord
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
 
+  include AlgoliaSearch
   algoliasearch do
-    attributes :name, :address, :category, :price
+    attribute :name, :address, :category
   end
-
 end

@@ -77,4 +77,9 @@ class SpacesController < ApplicationController
   def set_space
     @space = Space.find(params[:id])
   end
+
+  def empty_query(string)
+
+  end
+
 end

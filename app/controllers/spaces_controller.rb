@@ -54,7 +54,7 @@ class SpacesController < ApplicationController
 
   def update
     if @space.update(space_params)
-      redirect_to space_path(@space)
+      redirect_back(fallback_location: root_path)
     else
       render 'edit'
     end

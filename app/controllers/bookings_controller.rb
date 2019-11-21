@@ -7,7 +7,7 @@ class BookingsController < ApplicationController
     @booking.space = @space
     @booking.user = current_user
     if @booking.save
-      redirect_to space_path(@space, anchor: 'booking')
+      redirect_to space_path(@space, anchor: 'bookings')
     else
       @review = Review.new
       @reviewed_booking = Booking.where(user: current_user, space: @space).last
@@ -25,7 +25,7 @@ class BookingsController < ApplicationController
   def update
     @booking.update(booking_params)
     if @booking.update(booking_params)
-      redirect_to space_path(@space, anchor: 'booking')
+      redirect_back(fallback_location: root_path)
     else
       render 'edit'
     end
@@ -34,7 +34,7 @@ class BookingsController < ApplicationController
   def destroy
     @booking.destroy
     # redirect_to space_path(@space, anchor: 'booking')
-    redirect_to request.referer
+    redirect_back(fallback_location: root_path)
   end
 
   private

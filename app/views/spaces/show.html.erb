@@ -40,9 +40,11 @@
             <% booking.reviews.each do |review| %>
               <p>
                 <%='⭐️' *review.rating %> - <%= review.title %> - <%= review.content %>
-                <%= link_to("Edit", edit_space_booking_review_path(@space, booking, review)) %>
-                <%= link_to space_booking_review_path(@space, booking, review), method: :delete, data: {confirm: "Are you sure?"} do %>
-                  <i class="far fa-trash-alt"></i>
+                <% if user_signed_in? %>
+                  <%= link_to("Edit", edit_space_booking_review_path(@space, booking, review)) %>
+                  <%= link_to space_booking_review_path(@space, booking, review), method: :delete, data: {confirm: "Are you sure?"} do %>
+                    <i class="far fa-trash-alt"></i>
+                  <% end %>
                 <% end %>
               </p>
             <% end %>
@@ -73,7 +75,7 @@
       </div>
     <% end %>
 
-    <div class="sticky-booking" id="booking">
+    <div class="sticky-booking" id="bookings">
       <div class="show-box">
         <h2>Book now</h2>
         <h3><%= @space.price %>,00 €</h3>

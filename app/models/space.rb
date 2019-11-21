@@ -10,6 +10,6 @@ class Space < ApplicationRecord
 
   include AlgoliaSearch
   algoliasearch do
-    attribute :name, :address, :category
+    attribute :category
   end
 end

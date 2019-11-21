@@ -10,20 +10,26 @@
       <h3>On space-x, you will find unique places to host your next crazy party. Discover the hottest spots for outstanding experiences.</h3>
     </div>
     <div class="search-form">
-        <form>
+        <form action="spaces" method="get">
             <div class="form-group">
               <label for="space_address">Where</label>
-              <input type="text" class="form-control" id="space_address" placeholder="Anywhere">
+              <input type="search" class="form-control" id="space_address" placeholder="Anywhere" name="place">
             </div>
 
             <div class="form-group">
-              <label for="date_field">When</label>
-              <input type="text" class="form-control" id="booking_date" placeholder="Anytime">
+              <label for="cat">What</label>
+              <select class="form-control select required" name="cat" id="space_category">
+              <option value=""></option>
+              <option value="concert hall">concert hall</option>
+              <option value="movie theater">movie theater</option>
+              <option value="house">house</option>
+              <option value="cave">cave</option>
+              <option value="museum">museum</option>
+              <option value="art gallery">art gallery</option>
+              <option value="aquarium">aquarium</option></select>
             </div>
 
-            <button type="#" class="btn btn-primary">
-              <%= link_to("Search", spaces_path) %>
-            </button>
+            <input type="Submit" class="btn btn-primary">
         </form>
     </div>
   </div>

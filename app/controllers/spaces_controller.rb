@@ -1,17 +1,23 @@
 class SpacesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home, :index, :show]
+  skip_before_action :authenticate_user!, only: [:home, :index, :search, :show]
   before_action :set_space, only: [:show, :edit, :update]
 
   def home
     @spaces = Space.all.order(created_at: :desc).limit(5)
-    Space.clear_index!
-    Space.reindex!
   end
 
   def index
-    @spaces = Space.all.order(created_at: :desc)
-    @geospaces = Space.geocoded
-    @markers = @geospaces.map do |space|
+    if params[:place].nil? || (params[:place] == "" && params[:cat] == "")
+      @spaces = Space.all.order(created_at: :desc)
+    elsif params[:place] == ""
+      @spaces = Space.search(params[:cat])
+    elsif params[:cat] == ""
+      @spaces = Space.near(params[:place], 50)
+    else
+      @spaces = Space.search(params[:cat]) & Space.near(params[:place], 50)
+    end
+
+    @markers = @spaces.map do |space|
       {
         lat: space.latitude,
         lng: space.longitude
@@ -57,10 +63,15 @@ class SpacesController < ApplicationController
   private
 
   def space_params
-    params.require(:space).permit(:name, :address, :description, :category, :price, :cover_image, :published)
+    params.require(:space).permit(:name, :address, :description, :category, :price, :cover_image, :video_url, :published)
   end
 
   def set_space
     @space = Space.find(params[:id])
   end
+
+  def empty_query(string)
+
+  end
+
 end

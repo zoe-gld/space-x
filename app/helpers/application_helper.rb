@@ -6,4 +6,12 @@ module ApplicationHelper
   def empty_reviews(space)
     space.bookings.map { |booking| booking.reviews.count }.sum.zero?
   end
+
+  def url_converter(space)
+    return if space.video_url.nil?
+    input_url = space.video_url
+    split = input_url.split('/')
+    id = split.last
+    "https://www.youtube.com/embed/#{id}"
+  end
 end

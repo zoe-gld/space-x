@@ -26,7 +26,7 @@
 
   <div class="column-left">
 
-      <div class="show-box">
+      <div class="show-box" id="about">
         <h2>About this venue</h2>
         <p><%= @space.video_url %></p>
         <p><%= url_converter(@space) %></p>
@@ -38,7 +38,15 @@
           <h2>Reviews</h2>
           <% @space.bookings.each do |booking| %>
             <% booking.reviews.each do |review| %>
-              <p><%='⭐️' *review.rating %> - <%= review.title %> - <%= review.content %></p>
+              <p>
+                <%='⭐️' *review.rating %> - <%= review.title %> - <%= review.content %>
+                <% if user_signed_in? %>
+                  <%= link_to("Edit", edit_space_booking_review_path(@space, booking, review)) %>
+                  <%= link_to space_booking_review_path(@space, booking, review), method: :delete, data: {confirm: "Are you sure?"} do %>
+                    <i class="far fa-trash-alt"></i>
+                  <% end %>
+                <% end %>
+              </p>
             <% end %>
           <% end %>
         </div>
@@ -53,19 +61,8 @@
         <div class="show-box">
           <h2>Review your experience</h2>
           <%= render 'reviews/review-form' %>
-          <% @space.bookings.where(user: current_user).each do |booking| %>
-            <% booking.reviews.each do |review| %>
-              <p>
-                <%='⭐️' *review.rating %> - <%= review.title %> - <%= review.content %>
-                <%= link_to("Edit", edit_space_booking_review_path(@space, booking, review)) %>
-                <%= link_to space_booking_review_path(@space, booking, review), method: :delete, data: {confirm: "Are you sure?"} do %>
-                  <i class="far fa-trash-alt"></i>
-                <% end %>
-              </p>
-              <% end %>
-            <% end %>
-          </div>
-        <% end %>
+        </div>
+      <% end %>
   </div>
 
 
@@ -78,7 +75,7 @@
       </div>
     <% end %>
 
-    <div class="sticky-booking">
+    <div class="sticky-booking" id="bookings">
       <div class="show-box">
         <h2>Book now</h2>
         <h3><%= @space.price %>,00 €</h3>

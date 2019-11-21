@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.booking = @reviewed_booking
     if @review.save
-      redirect_to space_path(@space)
+      redirect_to space_path(@space, anchor: 'about')
     else
       @booking = Booking.new
       @markers = [{
@@ -23,7 +23,7 @@ class ReviewsController < ApplicationController
   def update
     @review.update(review_params)
     if @review.update(review_params)
-      redirect_to space_path(@space)
+      redirect_to space_path(@space, anchor: 'about')
     else
       render 'edit'
     end
@@ -31,7 +31,7 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review.destroy
-    redirect_to space_path(@space)
+    redirect_to space_path(@space, anchor: 'about')
   end
 
   private

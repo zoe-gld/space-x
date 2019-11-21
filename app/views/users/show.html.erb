@@ -4,13 +4,7 @@
 
   <div class="account-aside">
 
-     <% if @user.avatar.file.nil? %>
-      <img src=<%= asset_path("user.png")%>>
-    <% else %>
-      <%= @user.avatar %>
-     <% end %>
-
-
+    <%= image_tag avatar(@user) %>
 
     <h1> Welcome, <%= @user.first_name %>!</h1>
 

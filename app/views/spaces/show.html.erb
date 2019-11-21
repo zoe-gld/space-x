@@ -1,15 +1,20 @@
+
 <% if @space.cover_image.file.nil? %>
-  <div class="header-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= asset_path("placeholder.jpg") %>)">
-  </div>
+  <% cover_img = "#{asset_path('placeholder.jpg')}" %>
 <% else %>
-  <div class="header-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path @space.cover_image%>')">
-  </div>
+  <% cover_img = "#{cl_image_path @space.cover_image}" %>
 <% end %>
 
-<div class="show-header">
-  <h1><%= @space.name %></h1>
-  <p>📌<%= @space.address %></p>
+<div class="header-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url( <%= cover_img %> )">
+  <div class="show-header">
+    <h1><%= @space.name %></h1>
+    <p>📌<%= @space.address %></p>
+  </div>
+  <div class="price-tag">
+    <h3><%= @space.price %>,00 €</h3>
+  </div>
 </div>
+
 
 <div class="pages-container">
 
@@ -57,14 +62,18 @@
               </p>
               <% end %>
             <% end %>
+          </div>
           <% end %>
-        </div>
   </div>
 
   <div class="column-right">
+    <div class="show-box" id="place-video">
+      <iframe width="100%" height="350px" src="https://www.youtube.com/embed/g3AMQCf4lj4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
     <div class="sticky-booking">
       <div class="show-box">
-        <h2>Book now for <%= @space.price %>,00 €</h2>
+        <h2>Book now</h2>
+        <h3><%= @space.price %>,00 €</h3>
         <%= render 'bookings/booking-form' %>
         <% @space.bookings.where(user: current_user).each do |booking| %>
           <p>
@@ -76,7 +85,7 @@
           </p>
         <% end %>
       </div>
-      </div>
+    </div>
   </div>
 </div>
 

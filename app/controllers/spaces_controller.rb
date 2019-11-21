@@ -7,13 +7,16 @@ class SpacesController < ApplicationController
   end
 
   def index
-    Space.reindex!
-    if params[:place].nil?
+    if params[:place].nil? || (params[:place] == "" && params[:cat] == "")
       @spaces = Space.all.order(created_at: :desc)
+    elsif params[:place] == ""
+      @spaces = Space.search(params[:cat])
+    elsif params[:cat] == ""
+      @spaces = Space.near(params[:place], 50)
     else
-      search_results = Space.search("#{params[:cat]}") && Space.near("#{params[:place]}", 50)
-      (params[:cat] == "" && params[:place] == "") ? @spaces = Space.all.order(created_at: :desc) : @spaces = search_results
+      @spaces = Space.search(params[:cat]) & Space.near(params[:place], 50)
     end
+
     @markers = @spaces.map do |space|
       {
         lat: space.latitude,
@@ -21,17 +24,6 @@ class SpacesController < ApplicationController
       }
     end
   end
-
-  # def index
-  #   @spaces = Space.all.order(created_at: :desc)
-  #   @geospaces = Space.geocoded
-  #   @markers = @geospaces.map do |space|
-  #     {
-  #       lat: space.latitude,
-  #       lng: space.longitude
-  #     }
-  #   end
-  # end
 
   def show
     @markers = [{

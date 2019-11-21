@@ -1,23 +1,37 @@
 class SpacesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home, :index, :show]
+  skip_before_action :authenticate_user!, only: [:home, :index, :search, :show]
   before_action :set_space, only: [:show, :edit, :update]
 
   def home
     @spaces = Space.all.order(created_at: :desc).limit(5)
-    Space.clear_index!
-    Space.reindex!
   end
 
   def index
-    @spaces = Space.all.order(created_at: :desc)
-    @geospaces = Space.geocoded
-    @markers = @geospaces.map do |space|
+    Space.reindex!
+    if params[:place].nil?
+      @spaces = Space.all.order(created_at: :desc)
+    else
+      search_results = Space.search("#{params[:cat]}") + Space.near("#{params[:place]}", 50)
+      (params[:cat] == "" && params[:place] == "") ? @spaces = Space.all.order(created_at: :desc) : @spaces = search_results
+    end
+    @markers = @spaces.map do |space|
       {
         lat: space.latitude,
         lng: space.longitude
       }
     end
   end
+
+  # def index
+  #   @spaces = Space.all.order(created_at: :desc)
+  #   @geospaces = Space.geocoded
+  #   @markers = @geospaces.map do |space|
+  #     {
+  #       lat: space.latitude,
+  #       lng: space.longitude
+  #     }
+  #   end
+  # end
 
   def show
     @markers = [{

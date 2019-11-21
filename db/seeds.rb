@@ -22,8 +22,6 @@ puts 'Users created'
 puts 'Cleaning spaces...'
 Space.destroy_all
 
-puts 'Creating users...'
-
 SAMPLE = ['concert hall','movie theater', 'house', 'cave', 'museum', 'art gallery', 'aquarium']
 
 100.times do

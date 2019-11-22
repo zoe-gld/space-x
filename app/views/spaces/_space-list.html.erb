@@ -1,7 +1,7 @@
 <div class="index-container">
   <div class="card-grid-index">
     <div class="row">
-      <% @spaces.each do |space| %>
+      <% sorted!(@spaces).each do |space| %>
           <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card-trip">
               <% if space.cover_image.file.nil? %>
@@ -11,7 +11,10 @@
               <% end %>
               <div class="card-text">
                 <div class="card-info">
-                  <h2><%= link_to(space.name, space_path(space)) %></h2>
+                  <h2>
+                    <%= link_to(space.name, space_path(space)) %>
+                    <%= average_rating(aggregate_reviews(space)) unless average_rating(aggregate_reviews(space)).zero?  %>
+                  </h2>
                    <p><%= space.category %></p>
                 </div>
                 <h3>📍<%= space.address %></h3>

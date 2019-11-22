@@ -3,10 +3,6 @@ module ApplicationHelper
     ['concert hall', 'movie theater', 'house', 'cave', 'museum', 'art gallery', 'aquarium']
   end
 
-  def empty_reviews(space)
-    space.bookings.map { |booking| booking.reviews.count }.sum.zero?
-  end
-
   def url_converter(space)
     return if space.video_url.nil?
 
@@ -39,7 +35,11 @@ module ApplicationHelper
   end
 
   def average_rating(reviews)
-    (reviews.sum{|review| review.rating} / reviews.count.to_f).round(2)
+    reviews.empty? ? 0 : (reviews.sum{|review| review.rating} / reviews.count.to_f).round(2)
+  end
+
+  def sorted!(spaces)
+    spaces.sort_by {|space| average_rating(aggregate_reviews(space))}.reverse
   end
 
 end

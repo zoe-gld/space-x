@@ -27,11 +27,24 @@
 }
 
 .card-trip {
+  position: relative;
   overflow: hidden;
   background: white;
   height: 300px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   margin-bottom: 30px;
+}
+
+.card-trip > h2 {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgba(0,0,0,.5);
+  color: white;
+  padding: 7px;
+  font-size: 2.3em;
+  border-radius: 10px;
+  -webkit-font-smoothing: antialiased;
 }
 
 
@@ -71,7 +84,7 @@
   object-fit: cover;
 }
 .card-trip h2 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   margin: 0;
 }

@@ -9,14 +9,13 @@ class SpacesController < ApplicationController
   def index
     if params[:place].nil? || (params[:place] == "" && params[:cat] == "")
       @spaces = Space.all.order(created_at: :desc)
-    elsif params[:place] == ""
+    elsif params[:place] == "" || params[:place].nil?
       @spaces = Space.search(params[:cat])
-    elsif params[:cat] == ""
+    elsif params[:cat] == "" || params[:cat].nil?
       @spaces = Space.near(params[:place], 50)
     else
       @spaces = Space.search(params[:cat]) & Space.near(params[:place], 50)
     end
-
     @markers = @spaces.map do |space|
       {
         lat: space.latitude,

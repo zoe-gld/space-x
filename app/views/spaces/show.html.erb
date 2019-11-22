@@ -37,10 +37,12 @@
           <% aggregate_reviews(@space).each do |review| %>
               <p>
                 <%='⭐️' *review.rating %> - <%= review.title %> - <%= review.content %>
-                <% if Booking.find(review.booking_id).user_id == @user.id %>
-                  <%= link_to("Edit", edit_space_booking_review_path(@space, Booking.find(review.booking_id), review)) %>
-                  <%= link_to space_booking_review_path(@space, Booking.find(review.booking_id), review), method: :delete, data: {confirm: "Are you sure?"} do %>
-                    <i class="far fa-trash-alt"></i>
+                <% if user_signed_in? %>
+                  <% if Booking.find(review.booking_id).user_id == @user.id %>
+                    <%= link_to("Edit", edit_space_booking_review_path(@space, Booking.find(review.booking_id), review)) %>
+                    <%= link_to space_booking_review_path(@space, Booking.find(review.booking_id), review), method: :delete, data: {confirm: "Are you sure?"} do %>
+                      <i class="far fa-trash-alt"></i>
+                    <% end %>
                   <% end %>
                 <% end %>
               </p>

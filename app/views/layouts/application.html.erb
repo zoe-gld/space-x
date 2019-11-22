@@ -16,14 +16,11 @@
   </head>
   <body>
 
-  <%= render 'shared/navbar' %>
-    <!-- Fix navbar overlap -->
+  <div class="nav-container">
+    <%= render 'shared/navbar' %>
+  </div>
 
-    <% unless params[:controller] == "spaces" %>
-      <div  class="pages-container">
-    <% else %>
-      <div>
-    <% end %>
+  <div class="main">
 
     <%= yield %>
 

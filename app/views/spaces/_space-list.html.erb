@@ -1,16 +1,13 @@
-
-
 <div class="index-container">
 <div class="search-cards">
 
+  <div class="card-grid-index">
 
 <form id="spaces-search-bar" method="get">
   <input type="search" class="form-control" type="text" placeholder="Find a city to party" id="space_address" name="place">
   <button class="btn btn-primary" type="submit">Search</button>
 </form>
 
-
-  <div class="card-grid-index">
     <div class="row">
       <% sorted!(@spaces).each do |space| %>
           <div class="col-lg-6 col-md-12 col-sm-12">
@@ -50,8 +47,6 @@
       data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
     ></div>
  </div>
-
-
 
 </div>
 

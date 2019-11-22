@@ -22,7 +22,7 @@
     <h1>My spaces</h1>
     <div class="row">
       <% @spaces.each do |space| %>
-        <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="col-lg-4 col-md-12 col-sm-12">
           <div class="card-user">
             <% if space.cover_image.file.nil? %>
               <img src=<%= asset_path("placeholder.jpg")%>>

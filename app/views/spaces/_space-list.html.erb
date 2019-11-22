@@ -20,11 +20,12 @@
               <% else %>
                 <%= cl_image_tag space.cover_image %>
               <% end %>
+            <h2> <%= average_rating(aggregate_reviews(space)) unless average_rating(aggregate_reviews(space)).zero?  %> <%= '⭑' * average_rating(aggregate_reviews(space))  %>
+            </h2>
               <div class="card-text">
                 <div class="card-info">
                   <h2>
                     <%= link_to(space.name, space_path(space)) %>
-                    <%= average_rating(aggregate_reviews(space)) unless average_rating(aggregate_reviews(space)).zero?  %>
                   </h2>
                    <p><%= space.category %></p>
                 </div>

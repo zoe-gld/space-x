@@ -23,6 +23,17 @@ class SpacesController < ApplicationController
         lng: space.longitude
       }
     end
+
+    @geocoded_spaces = Space.geocoded
+    @markers = @geocoded_spaces.map do |space|
+      {
+        lat: space.latitude,
+        lng: space.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { space: space }),
+        image_url: helpers.asset_url('marker.png')
+      }
+
+    end
   end
 
   def show

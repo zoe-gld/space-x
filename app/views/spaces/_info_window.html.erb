@@ -1,0 +1,8 @@
+<% if space.cover_image.file.nil? %>
+  <img src=<%= asset_path("placeholder.jpg") %>>
+<% else %>
+  <%= cl_image_tag space.cover_image %>
+<% end %>
+
+<h3><%= link_to(space.name, space_path(space)) %></h3>
+<p><%= space.address %></p>

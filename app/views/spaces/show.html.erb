@@ -56,7 +56,7 @@
       </div>
 
       <% unless @reviewed_booking.nil? %>
-        <div class="show-box">
+        <div class="show-box" id="review-form">
           <h2>Review your experience</h2>
           <%= render 'reviews/review-form' %>
         </div>
@@ -77,20 +77,23 @@
         <h3><%= @space.price %>,00 €</h3>
         <%= render 'bookings/booking-form' %>
 
-        <% @space.bookings.future.where(user:current_user).each do |booking| %>
+        <% @space.bookings.future.where(user:current_user).order(date: :asc).each do |booking| %>
           <p>
-            You have an upcoming booking on <%= booking.date %></br>
-          </p>
-        <% end %>
-
-
-        <% @space.bookings.past.where(user: current_user).each do |booking| %>
-          <p>
-            You booked this space on <%= booking.date %></br>
+            You have an upcoming booking on <%= booking.date %>.</br>
             <%= link_to("Edit", edit_space_booking_path(@space, booking)) %>
             <%= link_to space_booking_path(@space, booking), method: :delete, data: {confirm: "Are you sure?"} do %>
               <i class="far fa-trash-alt"></i>
             <% end %>
+          </p>
+        <% end %>
+
+        <% unless @space.bookings.past.where(user: current_user).empty? %>
+          <h4>Past bookings</h4>
+        <% end %>
+        <% @space.bookings.past.where(user: current_user).order(date: :desc).each do |booking| %>
+          <p>
+            You booked this space on <%= booking.date %>,
+            <%= link_to('review it', space_path(@space, anchor: 'review-form'))%>.</br>
           </p>
         <% end %>
       </div>

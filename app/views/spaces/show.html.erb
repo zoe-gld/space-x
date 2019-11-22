@@ -76,9 +76,17 @@
         <h2>Book now</h2>
         <h3><%= @space.price %>,00 €</h3>
         <%= render 'bookings/booking-form' %>
-        <% @space.bookings.where(user: current_user).each do |booking| %>
+
+        <% @space.bookings.future.where(user:current_user).each do |booking| %>
           <p>
-            You have booked <%= booking.space.name %> on <%= booking.date %></br>
+            You have an upcoming booking on <%= booking.date %></br>
+          </p>
+        <% end %>
+
+
+        <% @space.bookings.past.where(user: current_user).each do |booking| %>
+          <p>
+            You booked this space on <%= booking.date %></br>
             <%= link_to("Edit", edit_space_booking_path(@space, booking)) %>
             <%= link_to space_booking_path(@space, booking), method: :delete, data: {confirm: "Are you sure?"} do %>
               <i class="far fa-trash-alt"></i>

@@ -28,8 +28,6 @@
 
       <div class="show-box" id="about">
         <h2>About this venue</h2>
-        <p><%= @space.video_url %></p>
-        <p><%= url_converter(@space) %></p>
         <p class="description"> <%= @space.description %></p>
       </div>
 
@@ -68,6 +66,14 @@
     <% unless @space.video_url.nil? %>
         <div class="show-box" id="place-video">
         <iframe width="100%" height="350px" src='<%= converted_url %>' frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    <% end %>
+
+    <% unless @reviewed_booking.nil? %>
+      <div class="show-box" id="review-form">
+        <h2>Ads from our friends</h2>
+        <iframe src="https://giphy.com/embed/7uqIGMyoNr3y0" width="480" height="365" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+        <a style="width:200px; margin-left:150px; " href="https://dodgebnb.herokuapp.com" target="_blank" class="btn btn-primary"/>Book party pet 🎉🐰</a>
       </div>
     <% end %>
 

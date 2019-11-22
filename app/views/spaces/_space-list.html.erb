@@ -1,4 +1,15 @@
+
+
 <div class="index-container">
+<div class="search-cards">
+
+
+<form id="spaces-search-bar">
+  <input type="search" class="form-control" type="text" placeholder="Search">
+  <button class="btn btn-primary" type="submit">Search</button>
+</form>
+
+
   <div class="card-grid-index">
     <div class="row">
       <% @spaces.each do |space| %>
@@ -22,7 +33,11 @@
     </div>
   </div>
 
-  <div class="map-index">
+
+
+</div>
+
+<div class="map-index">
 
     <div
       id="map"
@@ -30,9 +45,7 @@
       data-markers="<%= @markers.to_json %>"
       data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
     ></div>
-
-
-  </div>
+ </div>
 
 
 

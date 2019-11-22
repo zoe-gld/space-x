@@ -37,3 +37,20 @@ form {
   width: 100%;
 }
 
+//////Spaces search bar////////
+
+#spaces-search-bar {
+  background-color: transparent;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  padding: 0 40px;
+
+  .form-control {
+    width: 400px;
+    margin-right: 30px;
+  }
+  button {
+    margin: 0
+  }
+}

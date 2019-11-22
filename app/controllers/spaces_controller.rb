@@ -16,15 +16,15 @@ class SpacesController < ApplicationController
     else
       @spaces = Space.search(params[:cat]) & Space.near(params[:place], 50)
     end
-    @markers = @spaces.map do |space|
-      {
-        lat: space.latitude,
-        lng: space.longitude
-      }
-    end
+    # @markers = @spaces.map do |space|
+    #   {
+    #     lat: space.latitude,
+    #     lng: space.longitude
+    #   }
+    # end
 
-    @geocoded_spaces = Space.geocoded
-    @markers = @geocoded_spaces.map do |space|
+    # @geocoded_spaces = Space.geocoded
+    @markers = @spaces.map do |space|
       {
         lat: space.latitude,
         lng: space.longitude,
@@ -38,7 +38,9 @@ class SpacesController < ApplicationController
   def show
     @markers = [{
         lat: @space.latitude,
-        lng: @space.longitude
+        lng: @space.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { space: @space }),
+        image_url: helpers.asset_url('marker.png')
       }]
     @booking = Booking.new
     @reviewed_booking = Booking.where(user: current_user, space: @space).last

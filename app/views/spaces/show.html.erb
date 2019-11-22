@@ -33,7 +33,7 @@
 
       <% unless aggregate_reviews(@space).empty? %>
         <div class="show-box">
-          <h2>Reviews <%= average_rating(aggregate_reviews(@space)) %></h2>
+          <h2>Reviews</h2>
           <% aggregate_reviews(@space).each do |review| %>
               <p>
                 <%='⭐️' *review.rating %> - <%= review.title %> - <%= review.content %>

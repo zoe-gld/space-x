@@ -4,7 +4,7 @@
   <div class="card-grid-index">
 
 <form id="spaces-search-bar" method="get">
-  <input type="search" class="form-control" type="text" placeholder="Find a city to party" id="space_address" name="place">
+  <input placeholder="Find a city to party" id="space_address" name="place">
   <button class="btn btn-primary" type="submit">Search</button>
 </form>
 
@@ -17,8 +17,10 @@
               <% else %>
                 <%= cl_image_tag space.cover_image %>
               <% end %>
-            <h2> <%= average_rating(aggregate_reviews(space)) unless average_rating(aggregate_reviews(space)).zero?  %> <%= '⭑' * average_rating(aggregate_reviews(space))  %>
-            </h2>
+            <% unless average_rating(aggregate_reviews(space)).zero? %>
+
+            <h2> <%= average_rating(aggregate_reviews(space))%> <%= '⭑' * average_rating(aggregate_reviews(space))  %></h2>
+            <% end %>
               <div class="card-text">
                 <div class="card-info">
                   <h2>

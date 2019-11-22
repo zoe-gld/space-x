@@ -78,8 +78,8 @@
         <%= render 'bookings/booking-form' %>
 
         <% @space.bookings.future.where(user:current_user).order(date: :asc).each do |booking| %>
-          <p>
-            You have an upcoming booking on <%= booking.date %>.</br>
+          <p style="font-size: 1em;">
+            You have an upcoming booking on <%= booking.date %>.
             <%= link_to("Edit", edit_space_booking_path(@space, booking)) %>
             <%= link_to space_booking_path(@space, booking), method: :delete, data: {confirm: "Are you sure?"} do %>
               <i class="far fa-trash-alt"></i>

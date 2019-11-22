@@ -8,6 +8,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to space_path(@space, anchor: 'about')
     else
+      @taken_dates = @space.bookings.map { |booking| booking.date }
       @booking = Booking.new
       @markers = [{
           lat: @space.latitude,

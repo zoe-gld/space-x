@@ -8,7 +8,8 @@ const initFlatpickr = () => {
       altInput: true,
       altFormat: "F j, Y",
       dateFormat: "Y-m-d",
-      minDate: "today"
+      minDate: "today",
+      disable: JSON.parse(dateInput.dataset.dates)
     });
   };
 };

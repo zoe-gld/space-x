@@ -33,21 +33,19 @@
         <p class="description"> <%= @space.description %></p>
       </div>
 
-      <% unless empty_reviews(@space) %>
+      <% unless aggregate_reviews(@space).empty? %>
         <div class="show-box">
-          <h2>Reviews</h2>
-          <% @space.bookings.each do |booking| %>
-            <% booking.reviews.each do |review| %>
+          <h2>Reviews <%= average_rating(aggregate_reviews(@space)) %></h2>
+          <% aggregate_reviews(@space).each do |review| %>
               <p>
                 <%='⭐️' *review.rating %> - <%= review.title %> - <%= review.content %>
-                <% if Booking.find(booking.id).user_id == @user.id %>
-                  <%= link_to("Edit", edit_space_booking_review_path(@space, booking, review)) %>
-                  <%= link_to space_booking_review_path(@space, booking, review), method: :delete, data: {confirm: "Are you sure?"} do %>
+                <% if Booking.find(review.booking_id).user_id == @user.id %>
+                  <%= link_to("Edit", edit_space_booking_review_path(@space, Booking.find(review.booking_id), review)) %>
+                  <%= link_to space_booking_review_path(@space, Booking.find(review.booking_id), review), method: :delete, data: {confirm: "Are you sure?"} do %>
                     <i class="far fa-trash-alt"></i>
                   <% end %>
                 <% end %>
               </p>
-            <% end %>
           <% end %>
         </div>
       <% end %>

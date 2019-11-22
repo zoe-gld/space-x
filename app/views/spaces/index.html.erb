@@ -1,5 +1,10 @@
 <% if @spaces.empty? %>
-  <h1 style="padding-top: 100px;">Sorry, there is no space matching your criteria.</h1>
+  <h1 style="padding-top: 100px;">Sorry, there is no space matching your criteria, why not look into our whole collection</h1>
+  <% @spaces = Space.all %>
+  <% @markers = @spaces.map do |space| %>
+    <% {lat: space.latitude,lng: space.longitude} %>
+  <% end %>
+  <%= render 'spaces/space-list' %>
 <% else %>
   <%= render 'spaces/space-list' %>
 <% end %>

@@ -24,4 +24,22 @@ module ApplicationHelper
     end
   end
 
+  def taken_dates(space)
+    space.bookings.map {|booking| booking.date}.to_json
+  end
+
+  def aggregate_reviews(space)
+    reviews = []
+    space.bookings.each do |booking|
+      booking.reviews.each do |review|
+        reviews << review
+      end
+    end
+    reviews.sort_by{|review| review.rating}.reverse
+  end
+
+  def average_rating(reviews)
+    (reviews.sum{|review| review.rating} / reviews.count.to_f).round(2)
+  end
+
 end

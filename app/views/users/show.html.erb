@@ -41,7 +41,7 @@
       </div>
 
 
-      <h1>My bookings</h1>
+      <h1>Upcoming bookings</h1>
       <div class="row">
         <% @bookings.future.each do |booking| %>
         <div class="col-lg-12 col-md-12 col-sm-12">
@@ -63,7 +63,7 @@
         <% end %>
 
         <% unless @bookings.past.empty? %>
-          <h2>Past bookings history</h2>
+          <h1>Past bookings history</h1>
         <% end %>
 
         <% @bookings.past.each do |booking| %>

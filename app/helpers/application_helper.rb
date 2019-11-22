@@ -35,7 +35,7 @@ module ApplicationHelper
   end
 
   def average_rating(reviews)
-    reviews.empty? ? 0 : (reviews.sum{|review| review.rating} / reviews.count.to_f).round(2)
+    reviews.empty? ? 0 : (reviews.sum{|review| review.rating} / reviews.count.to_f).round(1)
   end
 
   def sorted!(spaces)
